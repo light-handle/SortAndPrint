@@ -13,7 +13,7 @@ namespace SortAndPrint
             SetUpData setUpData = new SetUpData();
             string dataDirectory = setUpData.createFoldersAndFiles();
 
-            Reader reader = new Reader();
+            IReader reader = new Reader();
             List<Content> contentList = reader.readFiles(dataDirectory);
         }
     }
