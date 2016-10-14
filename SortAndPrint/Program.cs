@@ -10,6 +10,11 @@ namespace SortAndPrint
     {
         static void Main(string[] args)
         {
+            SetUpData setUpData = new SetUpData();
+            string dataDirectory = setUpData.createFoldersAndFiles();
+
+            Reader reader = new Reader();
+            List<Content> contentList = reader.readFiles(dataDirectory);
         }
     }
 }
