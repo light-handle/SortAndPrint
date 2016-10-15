@@ -14,7 +14,12 @@ namespace SortAndPrint
             string dataDirectory = setUpData.createFoldersAndFiles();
 
             IReader reader = new Reader();
-            List<Content> contentList = reader.readFiles(dataDirectory);
+            List<Content> contentList = reader.ReadFiles(dataDirectory);
+
+            foreach (Content content in contentList)
+            {
+                Console.WriteLine("Folder Name is {0} || File Name is {1} || File Contents are {2}", content.FolderName, content.FileName, content.FileContent);
+            }
         }
     }
 }
