@@ -48,7 +48,6 @@ namespace SortAndPrint
             return contentList;
         }
 
-        // Process files.
         private Content ProcessFile(string path)
         {
             var content = new Content();

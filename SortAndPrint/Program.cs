@@ -16,10 +16,11 @@ namespace SortAndPrint
             IReader reader = new Reader();
             List<Content> contentList = reader.ReadFiles(dataDirectory);
 
-            foreach (Content content in contentList)
-            {
-                Console.WriteLine("Folder Name is {0} || File Name is {1} || File Contents are {2}", content.FolderName, content.FileName, content.FileContent);
-            }
+            ISorter sorter = new Sorter();
+            List<Content> sortedList = sorter.SortByFileNameAlphabetically(contentList);
+
+            IPrinter printer = new Printer();
+            printer.PrintFilesAndFolders(sortedList);
         }
     }
 }
