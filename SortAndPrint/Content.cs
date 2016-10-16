@@ -2,8 +2,8 @@
 {
     public class Content
     {
-        public string folderName { get; set; }
-        public string fileName { get; set; }
-        public string studentName { get; set; }
+        public string FolderName { get; set; }
+        public string FileName { get; set; }
+        public string FileContent { get; set; }
     }
 }

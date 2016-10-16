@@ -6,6 +6,6 @@ namespace SortAndPrint
 {
     public interface IReader
     {
-        List<Content> readFiles(String path);
+        List<Content> ReadFiles(String path);
     }
 }

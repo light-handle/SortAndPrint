@@ -34,6 +34,7 @@ namespace SortAndPrint
                     }
                 }   
             }
+            Console.WriteLine("Data Successfully Set up....");
             return dataDirectory;
         }
     }

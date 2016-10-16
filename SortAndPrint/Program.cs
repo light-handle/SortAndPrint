@@ -13,8 +13,14 @@ namespace SortAndPrint
             SetUpData setUpData = new SetUpData();
             string dataDirectory = setUpData.createFoldersAndFiles();
 
-            Reader reader = new Reader();
-            List<Content> contentList = reader.readFiles(dataDirectory);
+            IReader reader = new Reader();
+            List<Content> contentList = reader.ReadFiles(dataDirectory);
+
+            ISorter sorter = new Sorter();
+            List<Content> sortedList = sorter.SortByFileNameAlphabetically(contentList);
+
+            IPrinter printer = new Printer();
+            printer.PrintFilesAndFolders(sortedList);
         }
     }
 }

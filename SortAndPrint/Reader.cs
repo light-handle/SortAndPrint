@@ -10,19 +10,19 @@ namespace SortAndPrint
     // Reader class contains functions to read the directories and files
     public class Reader : IReader
     {
-        public List<Content> readFiles(String path)
-        {
-            List<Content> contentList = new List<Content>();
+        List<Content> contentList = new List<Content>();
+        Content content = new Content();
 
+        public List<Content> ReadFiles(string path)
+        {
+            Console.WriteLine("Path is " + path);
             if (File.Exists(path))
             {
-                // This path is a file
-                ProcessFile(path);
+                content = ProcessFile(path);
             }
             else if (Directory.Exists(path))
             {
-                // This path is a directory
-                ProcessDirectory(path);
+                contentList = ProcessDirectory(path);
             }
             else
             {
@@ -31,25 +31,36 @@ namespace SortAndPrint
             return contentList;
         }
 
-        // Process all files in the directory passed in, recurse on any directories 
-        // that are found, and process the files they contain.
-        private void ProcessDirectory(string targetDirectory)
+        private List<Content> ProcessDirectory(string targetDirectory)
         {
-            // Process the list of files found in the directory.
             string[] fileEntries = Directory.GetFiles(targetDirectory);
             foreach (string fileName in fileEntries)
-                ProcessFile(fileName);
-
-            // Recurse into subdirectories of this directory.
+            {
+                content = ProcessFile(fileName);
+                contentList.Add(content);
+            }
             string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
             foreach (string subdirectory in subdirectoryEntries)
-                ProcessDirectory(subdirectory);
+            {
+                contentList = ProcessDirectory(subdirectory);
+            }
+
+            return contentList;
         }
 
-        // Process files.
-        private void ProcessFile(string path)
+        private Content ProcessFile(string path)
         {
-            Console.WriteLine("Processed file '{0}'.", path);
+            var content = new Content();
+
+            content.FileName = Path.GetFileName(path);
+
+            content.FolderName = Path.GetFileName(Path.GetDirectoryName(path));
+
+            StreamReader reader = new StreamReader(path);
+            string fileContent = reader.ReadLine();
+            content.FileContent = fileContent;
+
+            return content;
         }
     }
 }
