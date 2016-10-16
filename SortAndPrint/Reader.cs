@@ -19,6 +19,7 @@ namespace SortAndPrint
             if (File.Exists(path))
             {
                 content = ProcessFile(path);
+                contentList.Add(content);
             }
             else if (Directory.Exists(path))
             {
