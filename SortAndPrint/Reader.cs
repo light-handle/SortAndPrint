@@ -57,9 +57,11 @@ namespace SortAndPrint
 
             content.FolderName = Path.GetFileName(Path.GetDirectoryName(path));
 
-            StreamReader reader = new StreamReader(path);
-            string fileContent = reader.ReadLine();
-            content.FileContent = fileContent;
+            using (StreamReader reader = new StreamReader(path))
+            {
+                string fileContent = reader.ReadLine();
+                content.FileContent = fileContent;
+            }
 
             return content;
         }

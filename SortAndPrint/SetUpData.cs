@@ -12,7 +12,7 @@ namespace SortAndPrint
         Random random = new Random();
         String[] nameArray = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
 
-        public string createFoldersAndFiles()
+        public string createFoldersAndFiles( )
         {
             string dataDirectory;
             string currentDirectory = Directory.GetCurrentDirectory();
@@ -35,6 +35,7 @@ namespace SortAndPrint
                 }   
             }
             Console.WriteLine("Data Successfully Set up....");
+            
             return dataDirectory;
         }
     }
