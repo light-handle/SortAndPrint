@@ -10,7 +10,6 @@ namespace SortAndPrint
     class SetUpData
     {
         Random random = new Random();
-        String[] nameArray = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
 
         public void createFoldersAndFiles(string dataDirectory, out int countOfFiles)
         {
@@ -28,7 +27,7 @@ namespace SortAndPrint
                     var filePath = Path.Combine(completePath, i.ToString()+"file.txt");
                     using (StreamWriter sw = File.CreateText(filePath))
                     {
-                        sw.WriteLine(nameArray[random.Next(nameArray.Length)]);
+                        sw.WriteLine(random.Next(1,500));
                     }
                     fileCount++;
                 }   

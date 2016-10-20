@@ -60,7 +60,7 @@ namespace SortAndPrint
             using (StreamReader reader = new StreamReader(path))
             {
                 string fileContent = reader.ReadLine();
-                content.FileContent = fileContent;
+                content.FileContent = Convert.ToInt32(fileContent);
             }
 
             return content;
