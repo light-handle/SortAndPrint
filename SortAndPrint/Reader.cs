@@ -59,8 +59,7 @@ namespace SortAndPrint
 
             using (StreamReader reader = new StreamReader(path))
             {
-                string fileContent = reader.ReadLine();
-                content.FileContent = Convert.ToInt32(fileContent);
+                content.FileContent = Convert.ToInt32(reader.ReadLine());
             }
 
             return content;
