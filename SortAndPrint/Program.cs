@@ -13,8 +13,9 @@ namespace SortAndPrint
         static void Main(string[] args)
         {
             int countOfFiles;
-            SetUpData setUpData = new SetUpData();
             string dataDirectory = ConfigurationManager.AppSettings["datadirectory"];
+
+            SetUpData setUpData = new SetUpData();
             setUpData.createFoldersAndFiles(dataDirectory, out countOfFiles);
             Console.WriteLine("Total files created {0}", countOfFiles);
 
