@@ -12,11 +12,9 @@ namespace SortAndPrint
         Random random = new Random();
         String[] nameArray = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
 
-        public string createFoldersAndFiles( )
+        public void createFoldersAndFiles(string dataDirectory, out int countOfFiles)
         {
-            string dataDirectory;
-            string currentDirectory = Directory.GetCurrentDirectory();
-            dataDirectory = Path.Combine(currentDirectory, "Data");
+            int fileCount = 0;
 
             for (int folder = 1; folder <= 10; folder++)
             {                                       
@@ -32,11 +30,11 @@ namespace SortAndPrint
                     {
                         sw.WriteLine(nameArray[random.Next(nameArray.Length)]);
                     }
+                    fileCount++;
                 }   
             }
+            countOfFiles = fileCount;
             Console.WriteLine("Data Successfully Set up....");
-            
-            return dataDirectory;
         }
     }
 }
