@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Configuration;
 
 namespace SortAndPrint
 {
@@ -14,17 +15,18 @@ namespace SortAndPrint
         public void createFoldersAndFiles(string dataDirectory, out int countOfFiles)
         {
             int fileCount = 0;
+            int folderCount = Convert.ToInt32(ConfigurationManager.AppSettings["nooffolders"]);
 
-            for (int folder = 1; folder <= 10; folder++)
+            for (int folder = 1; folder <= folderCount; folder++)
             {                                       
                 var completePath = Path.Combine(dataDirectory, folder.ToString());
                 Directory.CreateDirectory(completePath);
 
-                int noOfFiles = random.Next(1, 4);
+                int noOfFiles = Convert.ToInt32(ConfigurationManager.AppSettings["nooffiles"]);
 
                 for(int i = 1; i <= noOfFiles; i++)
                 {
-                    var filePath = Path.Combine(completePath, i.ToString()+"file.txt");
+                    var filePath = Path.Combine(completePath, Guid.NewGuid()+".txt");
                     using (StreamWriter sw = File.CreateText(filePath))
                     {
                         sw.WriteLine(random.Next(1,500));
