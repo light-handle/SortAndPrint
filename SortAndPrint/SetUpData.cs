@@ -22,7 +22,8 @@ namespace SortAndPrint
                 var completePath = Path.Combine(dataDirectory, folder.ToString());
                 Directory.CreateDirectory(completePath);
 
-                int noOfFiles = Convert.ToInt32(ConfigurationManager.AppSettings["nooffiles"]);
+                //int noOfFiles = Convert.ToInt32(ConfigurationManager.AppSettings["nooffiles"]);
+                int noOfFiles = random.Next(1, 4);
 
                 for(int i = 1; i <= noOfFiles; i++)
                 {
