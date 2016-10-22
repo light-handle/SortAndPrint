@@ -14,16 +14,35 @@ namespace SortAndPrint
         {
             int countOfFiles;
             string dataDirectory = ConfigurationManager.AppSettings["datadirectory"];
+            List<Content> contentList = new List<Content>();
+            List<Content> sortedList = new List<Content>();
 
-            SetUpData setUpData = new SetUpData();
-            setUpData.createFoldersAndFiles(dataDirectory, out countOfFiles);
-            Console.WriteLine("Total files created {0}", countOfFiles);
+            try
+            {
+                SetUpData setUpData = new SetUpData();
+                setUpData.createFoldersAndFiles(dataDirectory, out countOfFiles);
+                Console.WriteLine("Total files created {0}", countOfFiles);
 
-            IReader reader = new Reader();
-            List<Content> contentList = reader.ReadFiles(dataDirectory);
+                IReader reader = new Reader();
+                contentList = reader.ReadFiles(dataDirectory);
+                
+                ISorter sorter = new Sorter();
+                sortedList = sorter.SortByFileNameAlphabetically(contentList);
+            }
+            catch(ArgumentException ex)
+            {
+                Console.WriteLine("Invalid path specified. Cannot set up data.");
+                Console.Error.WriteLine(ex);
+                System.Environment.Exit(1);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Content List is empty or null.");
+                Console.Error.WriteLine(ex);
+                System.Environment.Exit(1);
+            }
 
-            ISorter sorter = new Sorter();
-            List<Content> sortedList = sorter.SortByFileNameAlphabetically(contentList);
+            
 
             IPrinter printer = new Printer();
             printer.PrintFilesAndFolders(sortedList);
