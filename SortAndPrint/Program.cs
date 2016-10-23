@@ -28,6 +28,9 @@ namespace SortAndPrint
                 
                 ISorter sorter = new Sorter();
                 sortedList = sorter.SortByFileNameAlphabetically(contentList);
+
+                IPrinter printer = new Printer();
+                printer.PrintFilesAndFolders(sortedList);
             }
             catch(ArgumentOutOfRangeException ex)
             {
@@ -40,12 +43,7 @@ namespace SortAndPrint
                 Console.WriteLine("Content List is empty or null.");
                 Console.Error.WriteLine(ex);
                 System.Environment.Exit(1);
-            }
-
-            
-
-            IPrinter printer = new Printer();
-            printer.PrintFilesAndFolders(sortedList);
+            }         
         }
     }
 }

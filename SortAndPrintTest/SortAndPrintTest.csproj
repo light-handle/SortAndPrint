@@ -55,6 +55,7 @@
     <Compile Include="ReaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SorterTest.cs" />
+    <Compile Include="PrinterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SortAndPrint\SortAndPrint.csproj">

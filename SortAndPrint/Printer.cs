@@ -10,9 +10,16 @@ namespace SortAndPrint
     {
         public void PrintFilesAndFolders(List<Content> contentList)
         {
-            foreach (Content content in contentList)
+            if (contentList == null || contentList.Count == 0)
             {
-                Console.WriteLine("Folder Name is {0} || File Name is {1} || File Contents are {2}", content.FolderName, content.FileName, content.FileContent);
+                throw new ArgumentNullException();
+            }
+            else
+            {
+                foreach (Content content in contentList)
+                {
+                    Console.WriteLine("Folder Name is {0} || File Name is {1} || File Contents are {2}", content.FolderName, content.FileName, content.FileContent);
+                }
             }
         }
     }
