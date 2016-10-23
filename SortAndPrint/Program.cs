@@ -29,13 +29,13 @@ namespace SortAndPrint
                 ISorter sorter = new Sorter();
                 sortedList = sorter.SortByFileNameAlphabetically(contentList);
             }
-            catch(ArgumentException ex)
+            catch(ArgumentOutOfRangeException ex)
             {
                 Console.WriteLine("Invalid path specified. Cannot set up data.");
                 Console.Error.WriteLine(ex);
                 System.Environment.Exit(1);
             }
-            catch(Exception ex)
+            catch(ArgumentNullException ex)
             {
                 Console.WriteLine("Content List is empty or null.");
                 Console.Error.WriteLine(ex);

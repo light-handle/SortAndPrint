@@ -10,9 +10,9 @@ namespace SortAndPrint
     {
         public List<Content> SortByFileNameAlphabetically(List<Content> contentList)
         {
-            if(contentList.Count == 0 || contentList == null)
+            if(contentList == null || contentList.Count == 0)
             {
-                throw new Exception();
+                throw new ArgumentNullException();
             }
             else
             {

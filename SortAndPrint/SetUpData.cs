@@ -28,9 +28,9 @@ namespace SortAndPrint
                     var completePath = Path.Combine(dataDirectory, folder.ToString());
                     Directory.CreateDirectory(completePath);
 
-                    int noOfFiles = random.Next(1, 4);
+                    int numberOfFiles = random.Next(1, 4);
 
-                    for (int i = 1; i <= noOfFiles; i++)
+                    for (int i = 1; i <= numberOfFiles; i++)
                     {
                         var filePath = Path.Combine(completePath, Guid.NewGuid() + ".txt");
                         using (StreamWriter sw = File.CreateText(filePath))

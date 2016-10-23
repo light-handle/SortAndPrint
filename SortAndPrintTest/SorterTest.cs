@@ -9,7 +9,7 @@ namespace SortAndPrintTest
     public class SorterTest
     {
         [TestMethod]
-        [ExpectedException(typeof(Exception), "Content List is empty or null.")]
+        [ExpectedException(typeof(ArgumentNullException), "Content List is empty or null.")]
         public void ShoudlThrowExceptionWhenContentListIsEmpty()
         {
             List<Content> emptyContentList = new List<Content>();
@@ -18,4 +18,10 @@ namespace SortAndPrintTest
             sorter.SortByFileNameAlphabetically(emptyContentList);
         }
     }
+
+   /* [TestClass]
+    public void  ShouldReturnSortedListByFileContent()
+    {
+
+    }*/
 }
