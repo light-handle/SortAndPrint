@@ -50,16 +50,17 @@ namespace SortAndPrint
 
         private Content ProcessFile(string path)
         {
-            StreamReader reader = new StreamReader(path);
-
             var content = new Content
             {
                 FolderName = Path.GetFileName(Path.GetDirectoryName(path)),
-                FileName = Path.GetFileName(path),
-                FileContent = Convert.ToInt32(reader.ReadLine())
-             
+                FileName = Path.GetFileName(path)
             };
 
+            using (StreamReader reader = new StreamReader(path))
+            {
+                content.FileContent = Convert.ToInt32(reader.ReadLine());
+            }
+            
             return content;
         }
     }

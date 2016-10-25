@@ -18,7 +18,7 @@ namespace SortAndPrint
             {
                 foreach (Content content in contentList)
                 {
-                    Console.WriteLine("Folder Name is {0} || File Name is {1} || File Contents are {2}", content.FolderName, content.FileName, content.FileContent);
+                    Console.WriteLine($"Folder Name is {content.FolderName} || File Name is {content.FileName} || File Contents are {content.FileContent}");
                 }
             }
         }
