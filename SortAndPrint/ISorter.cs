@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SortAndPrint
 {
-    interface ISorter
+    public interface ISorter
     {
         List<Content> SortByFileNameAlphabetically(List<Content> listContent);
     }

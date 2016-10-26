@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
+
 
 namespace SortAndPrint
 {
@@ -10,17 +12,38 @@ namespace SortAndPrint
     {
         static void Main(string[] args)
         {
-            SetUpData setUpData = new SetUpData();
-            string dataDirectory = setUpData.createFoldersAndFiles();
+            int countOfFiles;
+            string dataDirectory = ConfigurationManager.AppSettings["datadirectory"];
+            List<Content> contentList = new List<Content>();
+            List<Content> sortedList = new List<Content>();
 
-            IReader reader = new Reader();
-            List<Content> contentList = reader.ReadFiles(dataDirectory);
+            try
+            {
+                SetUpData setUpData = new SetUpData();
+                setUpData.createFoldersAndFiles(dataDirectory, out countOfFiles);
+                Console.WriteLine("Total files created {0}", countOfFiles);
 
-            ISorter sorter = new Sorter();
-            List<Content> sortedList = sorter.SortByFileNameAlphabetically(contentList);
+                IReader reader = new Reader();
+                contentList = reader.ReadFiles(dataDirectory);
+                
+                ISorter sorter = new Sorter();
+                sortedList = sorter.SortByFileNameAlphabetically(contentList);
 
-            IPrinter printer = new Printer();
-            printer.PrintFilesAndFolders(sortedList);
+                IPrinter printer = new Printer();
+                printer.PrintFilesAndFolders(sortedList);
+            }
+            catch(ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine("Invalid path specified. Cannot set up data.");
+                Console.Error.WriteLine(ex);
+                System.Environment.Exit(1);
+            }
+            catch(ArgumentNullException ex)
+            {
+                Console.WriteLine("Content List is empty or null.");
+                Console.Error.WriteLine(ex);
+                System.Environment.Exit(1);
+            }         
         }
     }
 }
