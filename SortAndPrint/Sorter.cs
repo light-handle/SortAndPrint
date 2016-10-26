@@ -6,13 +6,20 @@ using System.Threading.Tasks;
 
 namespace SortAndPrint
 {
-    class Sorter : ISorter
+    public class Sorter : ISorter
     {
         public List<Content> SortByFileNameAlphabetically(List<Content> contentList)
         {
-            List<Content> sortedList = contentList.OrderBy(o => o.FileContent).ToList();
+            if(contentList == null || contentList.Count == 0)
+            {
+                throw new ArgumentNullException();
+            }
+            else
+            {
+                List<Content> sortedList = contentList.OrderBy(o => o.FileContent).ToList();
 
-            return sortedList;
+                return sortedList;
+            }          
         }
     }
 }

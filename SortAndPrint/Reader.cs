@@ -7,7 +7,6 @@ using System.IO;
 
 namespace SortAndPrint
 {
-    // Reader class contains functions to read the directories and files
     public class Reader : IReader
     {
         List<Content> contentList = new List<Content>();
@@ -27,7 +26,7 @@ namespace SortAndPrint
             }
             else
             {
-                Console.WriteLine("{0} is not a valid file or directory.", path);
+                throw new ArgumentOutOfRangeException();
             }
             return contentList;
         }
@@ -51,18 +50,17 @@ namespace SortAndPrint
 
         private Content ProcessFile(string path)
         {
-            var content = new Content();
-
-            content.FileName = Path.GetFileName(path);
-
-            content.FolderName = Path.GetFileName(Path.GetDirectoryName(path));
+            var content = new Content
+            {
+                FolderName = Path.GetFileName(Path.GetDirectoryName(path)),
+                FileName = Path.GetFileName(path)
+            };
 
             using (StreamReader reader = new StreamReader(path))
             {
-                string fileContent = reader.ReadLine();
-                content.FileContent = fileContent;
+                content.FileContent = Convert.ToInt32(reader.ReadLine());
             }
-
+            
             return content;
         }
     }
