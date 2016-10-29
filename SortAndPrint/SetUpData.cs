@@ -40,10 +40,8 @@ namespace SortAndPrint
                         fileCount++;
                     }
                 }
-               // countOfFiles = fileCount;
                 Console.WriteLine("Data Successfully Set up....");
             }
-           // return Task;
         }
     }
 }

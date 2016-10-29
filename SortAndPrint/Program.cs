@@ -12,7 +12,6 @@ namespace SortAndPrint
     {
         static void Main(string[] args)
         {
-            //int countOfFiles;
             string dataDirectory = ConfigurationManager.AppSettings["datadirectory"];
             List<Content> contentList = new List<Content>();
             List<Content> sortedList = new List<Content>();
@@ -21,7 +20,6 @@ namespace SortAndPrint
             {
                 SetUpData setUpData = new SetUpData();
                 setUpData.createFoldersAndFiles(dataDirectory).Wait();
-                //Console.WriteLine("Total files created {0}", countOfFiles);
 
                 IReader reader = new Reader();
                 contentList = reader.ReadFiles(dataDirectory).Result;
