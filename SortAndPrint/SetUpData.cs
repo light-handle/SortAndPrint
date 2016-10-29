@@ -12,7 +12,7 @@ namespace SortAndPrint
     {
         Random random = new Random();
 
-        public void createFoldersAndFiles(string dataDirectory, out int countOfFiles)
+        public async Task createFoldersAndFiles(string dataDirectory)
         {
             int fileCount = 0;
             int folderCount = Convert.ToInt32(ConfigurationManager.AppSettings["nooffolders"]);
@@ -35,14 +35,15 @@ namespace SortAndPrint
                         var filePath = Path.Combine(completePath, Guid.NewGuid() + ".txt");
                         using (StreamWriter sw = File.CreateText(filePath))
                         {
-                            sw.WriteLine(random.Next(1, 500));
+                            await sw.WriteLineAsync(Convert.ToString(random.Next(1, 500)));
                         }
                         fileCount++;
                     }
                 }
-                countOfFiles = fileCount;
+               // countOfFiles = fileCount;
                 Console.WriteLine("Data Successfully Set up....");
             }
+           // return Task;
         }
     }
 }

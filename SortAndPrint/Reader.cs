@@ -12,17 +12,17 @@ namespace SortAndPrint
         List<Content> contentList = new List<Content>();
         Content content = new Content();
 
-        public List<Content> ReadFiles(string path)
+        public async Task<List<Content>> ReadFiles(string path)
         {
             Console.WriteLine("Path is " + path);
             if (File.Exists(path))
             {
-                content = ProcessFile(path);
+                content = await ProcessFile(path);
                 contentList.Add(content);
             }
             else if (Directory.Exists(path))
             {
-                contentList = ProcessDirectory(path);
+                contentList = await ProcessDirectory(path);
             }
             else
             {
@@ -31,24 +31,24 @@ namespace SortAndPrint
             return contentList;
         }
 
-        private List<Content> ProcessDirectory(string targetDirectory)
+        private async Task<List<Content>> ProcessDirectory(string targetDirectory)
         {
             string[] fileEntries = Directory.GetFiles(targetDirectory);
             foreach (string fileName in fileEntries)
             {
-                content = ProcessFile(fileName);
+                content = await ProcessFile(fileName);
                 contentList.Add(content);
             }
             string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
             foreach (string subdirectory in subdirectoryEntries)
             {
-                contentList = ProcessDirectory(subdirectory);
+                contentList = await ProcessDirectory(subdirectory);
             }
 
             return contentList;
         }
 
-        private Content ProcessFile(string path)
+        private async Task<Content> ProcessFile(string path)
         {
             var content = new Content
             {
@@ -58,7 +58,7 @@ namespace SortAndPrint
 
             using (StreamReader reader = new StreamReader(path))
             {
-                content.FileContent = Convert.ToInt32(reader.ReadLine());
+                content.FileContent = Convert.ToInt32(await reader.ReadLineAsync());
             }
             
             return content;
