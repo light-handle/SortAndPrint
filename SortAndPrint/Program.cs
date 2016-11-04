@@ -19,10 +19,10 @@ namespace SortAndPrint
             try
             {
                 SetUpData setUpData = new SetUpData();
-                setUpData.createFoldersAndFiles(dataDirectory).Wait();
+                setUpData.createFoldersAndFilesAsync(dataDirectory).Wait();
 
                 IReader reader = new Reader();
-                contentList = reader.ReadFiles(dataDirectory).Result;
+                contentList = reader.ReadFilesAsync(dataDirectory).Result;
                 
                 ISorter sorter = new Sorter();
                 sortedList = sorter.SortByFileNameAlphabetically(contentList);

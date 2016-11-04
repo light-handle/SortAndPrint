@@ -12,17 +12,22 @@ namespace SortAndPrint
         List<Content> contentList = new List<Content>();
         Content content = new Content();
 
-        public async Task<List<Content>> ReadFiles(string path)
+        public async Task<List<Content>> ReadFilesAsync(string path)
         {
+            var tasks = new List<Task>();
+
+            //tasks.Add(ProcessFileAsync(path));
+
             Console.WriteLine("Path is " + path);
             if (File.Exists(path))
             {
-                content = await ProcessFile(path);
+                content = await ProcessFileAsync(path);
+                //content = await Task.WhenAny(tasks).Result;
                 contentList.Add(content);
             }
             else if (Directory.Exists(path))
             {
-                contentList = await ProcessDirectory(path);
+                contentList =  await ProcessDirectoryAsync(path);
             }
             else
             {
@@ -31,24 +36,35 @@ namespace SortAndPrint
             return contentList;
         }
 
-        private async Task<List<Content>> ProcessDirectory(string targetDirectory)
+        private async Task<List<Content>> ProcessDirectoryAsync(string targetDirectory)
         {
+            var tasks = new List<Task>();
+
+            //tasks.Add(ProcessFileAsync(path));
+
+            //tasks.Add(ProcessFileAsync(path));
+
             string[] fileEntries = Directory.GetFiles(targetDirectory);
             foreach (string fileName in fileEntries)
             {
-                content = await ProcessFile(fileName);
+                content = await ProcessFileAsync(fileName);
                 contentList.Add(content);
             }
             string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-            foreach (string subdirectory in subdirectoryEntries)
+            /*foreach (string subdirectory in subdirectoryEntries)
             {
-                contentList = await ProcessDirectory(subdirectory);
-            }
+                contentList = await ProcessDirectoryAsync(subdirectory);
+            }*/
+
+            Parallel.ForEach(subdirectoryEntries, async (currentDirectory) =>
+            {
+                contentList = await ProcessDirectoryAsync(currentDirectory);
+            });
 
             return contentList;
         }
 
-        private async Task<Content> ProcessFile(string path)
+        private async Task<Content> ProcessFileAsync(string path)
         {
             var content = new Content
             {

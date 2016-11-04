@@ -1,4 +1,6 @@
-﻿namespace SortAndPrint
+﻿using System;
+
+namespace SortAndPrint
 {
     public class Content
     {

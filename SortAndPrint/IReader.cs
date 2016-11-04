@@ -7,6 +7,6 @@ namespace SortAndPrint
 {
     public interface IReader
     {
-        Task<List<Content>> ReadFiles(String path);
+        Task<List<Content>> ReadFilesAsync(String path);
     }
 }

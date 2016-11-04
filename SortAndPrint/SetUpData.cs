@@ -12,7 +12,7 @@ namespace SortAndPrint
     {
         Random random = new Random();
 
-        public async Task createFoldersAndFiles(string dataDirectory)
+        public async Task createFoldersAndFilesAsync(string dataDirectory)
         {
             int fileCount = 0;
             int folderCount = Convert.ToInt32(ConfigurationManager.AppSettings["nooffolders"]);
